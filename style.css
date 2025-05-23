@@ -1,0 +1,253 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+:root {
+    --number-of-slices: 15;
+    --angle: calc(360deg / var(--number-of-slices));
+
+    --gold: rgb(220, 185, 46);
+    --silver: rgb(181, 181, 181);
+    --brown: rgb(101, 44, 10);
+}
+
+body {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+.wheel {
+    border-radius: 50%;
+
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#outer-wheel-1 {
+    background-color: var(--brown);
+    width: 95vw;
+    height: 95vw;
+    border: solid black 5px;
+}
+
+#outer-wheel-2 {
+    background-color: rgb(255, 255, 255);
+    background-color: var(--gold);
+    width: calc(80vw - 3%);
+    height: calc(80vw - 3%);
+    position: relative;
+    animation-name: spin;
+    animation-duration: 16s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.slice {
+    width: calc((80vw - 5%) - 50%);
+    height: calc((80vw - 5%) - 50%);
+    mask: radial-gradient(100% 100% at 100% 100%,#000000 100%,#00000000 0%);
+    clip-path: shape(from 55.5% 0%, line to 100% 0%, line to 100% 100%, close);
+    position: absolute;
+    translate: 2% 4%;
+    transform-origin: 99.5% 99.5%;
+    border-right: var(--silver) solid 4px;
+}
+
+.black {
+    background-color: black;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.slice:nth-child(1) {
+    transform: rotate(calc(var(--angle) * 1));
+}
+
+.slice:nth-child(2) {
+    transform: rotate(calc(var(--angle) * 2));
+}
+
+.slice:nth-child(3) {
+    transform: rotate(calc(var(--angle) * 3));
+}
+
+.slice:nth-child(4) {
+    transform: rotate(calc(var(--angle) * 4));
+}
+
+.slice:nth-child(5) {
+    transform: rotate(calc(var(--angle) * 5));
+}
+
+.slice:nth-child(6) {
+    transform: rotate(calc(var(--angle) * 6));
+}
+
+.slice:nth-child(7) {
+    transform: rotate(calc(var(--angle) * 7));
+}
+
+.slice:nth-child(8) {
+    transform: rotate(calc(var(--angle) * 8));
+}
+
+.slice:nth-child(9) {
+    transform: rotate(calc(var(--angle) * 9));
+}
+
+.slice:nth-child(10) {
+    transform: rotate(calc(var(--angle) * 10));
+}
+
+.slice:nth-child(11) {
+    transform: rotate(calc(var(--angle) * 11));
+}
+
+.slice:nth-child(12) {
+    transform: rotate(calc(var(--angle) * 12));
+}
+
+.slice:nth-child(13) {
+    transform: rotate(calc(var(--angle) * 13));
+}
+
+.slice:nth-child(14) {
+    transform: rotate(calc(var(--angle) * 14));
+}
+
+#inner-wheel-1 {
+    border: solid var(--silver) 3px;
+    border-radius: 50%;
+    width: calc(80vw - 40%);
+    height: calc(80vw - 40%);
+    position: absolute;
+    translate: 27% 27%;
+}
+
+#inner-wheel-2 {
+    background-color: var(--gold);
+    border: solid var(--silver) 3px;
+    border-radius: 50%;
+    width: calc(80vw - 60%);
+    height: calc(80vw - 60%);
+    position: absolute;
+    translate: 62% 62%;
+}
+
+#ball-container {
+    /* background-color: rgb(36, 58, 224); */
+    width: calc(50vw - 14.5%);
+    height: calc(50vw - 14.5%);
+    position: absolute;
+    translate: 0% 0%;
+    transform-origin: 99.5% 99.5%;
+    
+    animation-name: ball-spin;
+    animation-duration: 8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+#ball {
+    background-color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 1.2rem 0 0 1.2rem;
+
+    animation-name: ball;
+    animation-duration: 8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(3240deg);
+    }
+}
+
+@keyframes ball-spin {
+    to {
+        transform: rotate(-6240deg);
+    }
+
+}
+
+@keyframes ball {
+    from {
+        border: none;
+        transform: scale(0.8);
+    }
+    
+    to {
+        translate: 4.5rem 4.5rem;
+        transform: scale(0.8);
+        border: none;
+    }
+
+    70% {
+        translate: 0 0;
+    }
+    
+    80% {
+        border: none;
+        transform: scale(0.8);
+    }
+
+    85% {
+        transform: scale(1.2);
+        border: solid 3px rgb(118, 118, 118);
+    }
+
+    88% {
+        transform: scale(0.8);
+        border: none;
+    }
+
+    91% {
+        transform: scale(1.1);
+        border: solid 2px rgb(82, 82, 82);
+    }
+
+    94% {
+        transform: scale(0.8);
+        border: none;
+    }
+
+    97% {
+        transform: scale(1);
+        border: solid 1px rgb(46, 46, 46);
+    }
+}
+
+/* 
+#ball-container {
+    background-color: rgb(36, 58, 224);
+    width: calc(80vw - 64%);
+    height: calc(80vw - 64%);
+    position: absolute;
+    translate: 27% 27%;
+    transform-origin: 99.5% 99.5%;
+    
+    animation-name: ball-spin;
+    animation-duration: 8s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+} */
