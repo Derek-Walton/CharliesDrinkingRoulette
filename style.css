@@ -7,6 +7,8 @@
 :root {
     --number-of-slices: 15;
     --angle: calc(360deg / var(--number-of-slices));
+    --num-of-spins: ;
+    --ball-spins: ;
 
     --gold: rgb(220, 185, 46);
     --silver: rgb(181, 181, 181);
@@ -14,12 +16,14 @@
 }
 
 body {
-    background-color: green;
+    /* background-color: green; */
+    background: radial-gradient(green, rgb(0, 69, 0));
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 100dvh;
     overflow: hidden;
+    flex-direction: column;
 }
 
 .wheel {
@@ -33,11 +37,49 @@ body {
     justify-content: center;
 }
 
+#glint {
+    width: 95vw;
+    height: 95vw;
+    background: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 20%);
+    position: absolute;
+    opacity: 80%;
+}
+
 #outer-wheel-1 {
-    background-color: var(--brown);
+    /* background-color: var(--brown); */
+    /* background: radial-gradient(rgb(52, 23, 7) 60%, var(--brown) 70%); */
+    background: radial-gradient(var(--brown)60%, rgb(52, 23, 7) 70%);
     width: 95vw;
     height: 95vw;
     border: solid black 5px;
+}
+
+#center-piece-stick-1 {
+    width: calc(80vw - 90%);
+    height: calc(80vw - 102%);
+    background-color: rgb(138, 138, 138);
+    position: absolute;
+    top: calc(50% - (80vw - 102%) / 2);
+    left: calc(50% - (80vw - 90%) / 2);
+}
+
+#center-piece-stick-2 {
+    height: calc(80vw - 90%);
+    width: calc(80vw - 102%);
+    background-color: rgb(138, 138, 138);
+    position: absolute;
+    left: calc(50% - calc(80vw - 102%) / 2);
+    top: calc(50% - (80vw - 90%) / 2);
+}
+
+#center-piece-ball {
+    height: calc(80vw - 100%);
+    width: calc(80vw - 100%);
+    background-color: rgb(138, 138, 138);
+    position: absolute;
+    top: calc(50% - (80vw - 100%) / 2);
+    left: calc(50% - (80vw - 100%) / 2);
+    border-radius: 50%;
 }
 
 #outer-wheel-2 {
@@ -46,7 +88,7 @@ body {
     width: calc(80vw - 3%);
     height: calc(80vw - 3%);
     position: relative;
-    animation-name: spin;
+    /* animation-name: spin; */
     animation-duration: 16s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
@@ -59,8 +101,26 @@ body {
     clip-path: shape(from 55.5% 0%, line to 100% 0%, line to 100% 100%, close);
     position: absolute;
     translate: 2% 4%;
-    transform-origin: 99.5% 99.5%;
+    transform-origin: 98.0% 98.5%;
     border-right: var(--silver) solid 4px;
+
+    justify-content: right;
+    display: flex;
+}
+
+.slice > div {
+    font-size: calc(((80vw - 35%) - 50%) / 30);
+    color: white;
+    rotate: -11deg;
+    width: calc(((80vw - 50%) - 50%) / 3.4);
+    height: calc(((80vw - 35%) - 50%) / 4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-wrap: balance;
+    position: absolute;
+    
 }
 
 .black {
@@ -137,7 +197,8 @@ body {
     width: calc(80vw - 40%);
     height: calc(80vw - 40%);
     position: absolute;
-    translate: 27% 27%;
+    left: calc(49% - (80vw - 40%) / 2);
+    top: calc(49% - (80vw - 40%) / 2);
 }
 
 #inner-wheel-2 {
@@ -147,7 +208,8 @@ body {
     width: calc(80vw - 60%);
     height: calc(80vw - 60%);
     position: absolute;
-    translate: 62% 62%;
+    top: calc(49% - (80vw - 60%) / 2);
+    left: calc(49% - (80vw - 60%) / 2);
 }
 
 #ball-container {
@@ -158,8 +220,8 @@ body {
     translate: 0% 0%;
     transform-origin: 99.5% 99.5%;
     
-    animation-name: ball-spin;
-    animation-duration: 8s;
+    /* animation-name: ball-spin; */
+    animation-duration: 16s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
@@ -169,23 +231,45 @@ body {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    margin: 1.2rem 0 0 1.2rem;
+    margin: 0 0 0 2.6rem;
+    /* translate: 4.2rem 4.8rem; */
 
-    animation-name: ball;
-    animation-duration: 8s;
+    /* animation-name: ball; */
+    animation-duration: 16s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
 
 @keyframes spin {
     to {
-        transform: rotate(3240deg);
+        transform: rotate(var(--num-of-spins));
+    }
+    90% {
+        transform: rotate(var(--num-of-spins));
+    }
+
+    5% {
+        transform: rotate(-90deg);
+        /* transform: rotate(0); */
     }
 }
 
 @keyframes ball-spin {
+    75% {
+        transform: rotate(var(--ball-spins));
+    }
+
+    5% {
+        transform: rotate(90deg)
+        /* transform: rotate(0) */
+    }
+
+    88% {
+        transform: rotate(var(--ball-spins))
+    }
+
     to {
-        transform: rotate(-6240deg);
+        transform: rotate(calc(var(--ball-spins) + 10deg))
     }
 
 }
@@ -197,57 +281,103 @@ body {
     }
     
     to {
-        translate: 4.5rem 4.5rem;
+        /* translate: 4rem 4.7rem; */
+        translate: 15vw 15.8vw;
+        transform: scale(0.8);
+        border: none;
+    }
+    
+    70% {
+        /* translate: 4rem 4.7rem; */
+        translate: 15vw 15.8vw;
         transform: scale(0.8);
         border: none;
     }
 
-    70% {
+    40% {
         translate: 0 0;
     }
     
-    80% {
+    50% {
         border: none;
         transform: scale(0.8);
     }
 
-    85% {
+    55% {
         transform: scale(1.2);
         border: solid 3px rgb(118, 118, 118);
     }
 
-    88% {
+    58% {
         transform: scale(0.8);
         border: none;
     }
 
-    91% {
+    61% {
         transform: scale(1.1);
         border: solid 2px rgb(82, 82, 82);
     }
 
-    94% {
+    64% {
         transform: scale(0.8);
         border: none;
     }
 
-    97% {
+    67% {
         transform: scale(1);
         border: solid 1px rgb(46, 46, 46);
     }
 }
 
-/* 
-#ball-container {
-    background-color: rgb(36, 58, 224);
-    width: calc(80vw - 64%);
-    height: calc(80vw - 64%);
-    position: absolute;
-    translate: 27% 27%;
-    transform-origin: 99.5% 99.5%;
+
+
+@keyframes move-ball {
+    from {
+        /* translate: 4rem 4.7rem; */
+        transform: rotate(calc(var(--ball-spins) + 6490deg));
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@keyframes move-ball-container {
+    from {
+        translate: 4rem 4.7rem;
+    }
+
+    50% {
+        transform: scale(1.2);
+        border: solid 3px rgb(118, 118, 118);
+    }
     
-    animation-name: ball-spin;
-    animation-duration: 8s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-} */
+    to {
+        transform: scale(0.8);
+        translate: 0 0;
+    }
+}
+
+@keyframes move-wheel {
+    from {
+        transform: rotate(calc(var(--num-of-spins) - 3240deg));
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+button {
+    padding: 2rem;
+    font-size: 3rem;
+    border: black 4px solid;
+    border-radius: 20px;
+    background-color: gold;
+    transition: .2s;
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: var(--gold);
+}
